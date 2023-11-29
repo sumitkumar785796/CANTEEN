@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import cloudinary.uploader
 # Create your views here.
 def loginPage(request):
     context={'title':'Admin Login'}
@@ -125,17 +126,27 @@ def deleteItem(request,id):
     return redirect('/back/menu/',context)
 @login_required(login_url='/back/')
 def addcate(request):
-    context={'title':'Add Categories'}
-    if request.method=="POST":
-        data=request.POST
-        img=request.FILES.get('img')
-        catname=data.get('catname')
-        AddCate.objects.create(img=img,catname=catname)
+    context = {'title': 'Add Categories'}
+    
+    if request.method == "POST":
+        data = request.POST
+        img = request.FILES.get('img')
         
-        messages.success(request,'Add record Sucessfully!!!')
+        # Upload image to Cloudinary
+        upload_result = cloudinary.uploader.upload(img, public_id="olympic_flag")
+        
+        # Get the Cloudinary URL of the uploaded image
+        img_url = upload_result.get('secure_url')
+        
+        catname = data.get('catname')
+        
+        # Create a new AddCate object with the uploaded image URL and category name
+        AddCate.objects.create(img=img_url, catname=catname)
+        
+        messages.success(request, 'Record added successfully!!!')
         return redirect('/back/menu/')
     
-    return render(request,'addcategories.html',context)
+    return render(request, 'addcategories.html', context)
 @login_required(login_url='/back/')
 def editCate(request,id):
     queryset=AddCate.objects.get(id=id)
