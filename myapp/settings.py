@@ -163,9 +163,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Cloudinary configuration
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME' : os.environ['CLOUD_NAME'],
-    'API_KEY' : os.environ['CLOUD_API_KEY'],
-    'API_SECRET' : os.environ['CLOUD_API_SECRET']
+    'CLOUD_NAME' : os.environ.get('CLOUD_NAME', ''),
+    'API_KEY' : os.environ.get('CLOUD_API_KEY', ''),
+    'API_SECRET' : os.environ.get('CLOUD_API_SECRET', '')
 }
+
 # if os.environ["ENVIRONMENT"] == "PRODUCTION":
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
