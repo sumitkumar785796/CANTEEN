@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import cloudinary
 # Create your views here.
 def loginPage(request):
     context={'title':'Admin Login'}
@@ -129,6 +130,7 @@ def addcate(request):
     if request.method=="POST":
         data=request.POST
         img=request.FILES.get('img')
+        cloudinary.uploader.upload(img)
         catname=data.get('catname')
         AddCate.objects.create(img=img,catname=catname)
         
