@@ -125,29 +125,17 @@ def deleteItem(request,id):
     return redirect('/back/menu/',context)
 @login_required(login_url='/back/')
 def addcate(request):
-    context = {'title': 'Add Categories'}
-
-    if request.method == "POST":
-        data = request.POST
-        img = request.FILES.get('img')
-        catname = data.get('catname')
-
-        # Validate the uploaded image
-        if not img:
-            messages.error(request, 'Please select an image to upload.')
-            return render(request, 'addcategories.html', context)
-
-        # Save the uploaded image and create the category record
-        try:
-            new_cate = AddCate(img=img, catname=catname)
-            new_cate.save()
-            messages.success(request, 'Category added successfully!')
-        except Exception as e:
-            messages.error(request, f'Error adding category: {str(e)}')
-
+    context={'title':'Add Categories'}
+    if request.method=="POST":
+        data=request.POST
+        img=request.FILES.get('img')
+        catname=data.get('catname')
+        AddCate.objects.create(img=img,catname=catname)
+        
+        messages.success(request,'Add record Sucessfully!!!')
         return redirect('/back/menu/')
-
-    return render(request, 'addcategories.html', context)
+    
+    return render(request,'addcategories.html',context)
 @login_required(login_url='/back/')
 def editCate(request,id):
     queryset=AddCate.objects.get(id=id)
