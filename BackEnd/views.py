@@ -147,8 +147,7 @@ def addcate(request):
         except Exception as e:
             # Handle any exceptions that may occur during image upload or database insertion
             messages.error(request, f'Error: {str(e)}')
-            return redirect('/back/menu/')  # Redirect to the same page or an error page
-    
+            return redirect('/back/menu/')  # Redirect to the same page or an error page    
     return render(request,'addcategories.html',context)
 @login_required(login_url='/back/')
 def editCate(request,id):
