@@ -5,7 +5,22 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .forms import SuperuserRegistrationForm
 # Create your views here.
+
+def superuser_registration(request):
+    if request.method == 'POST':
+        form = SuperuserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_superuser = True
+            user.save()
+            login(request, user)
+            return redirect('admin')  # Redirect to your home page
+    else:
+        form = SuperuserRegistrationForm()
+
+    return render(request, 'registration/superuser_registration.html', {'form': form})
 def loginPage(request):
     context={'title':'Admin Login'}
     if request.method == "POST":
