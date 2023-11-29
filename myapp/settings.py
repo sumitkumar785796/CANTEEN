@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'BackEnd',
     'FrontEnd',
     'cart',
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
     'cloudinary',
 ]
 
