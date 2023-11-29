@@ -5,7 +5,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from cloudinary.uploader import upload
 # Create your views here.
 def loginPage(request):
     context={'title':'Admin Login'}
@@ -126,28 +125,16 @@ def deleteItem(request,id):
     return redirect('/back/menu/',context)
 @login_required(login_url='/back/')
 def addcate(request):
-    context = {'title': 'Add Categories'}
-
-    if request.method == "POST":
-        form_data = request.POST
-        img = request.FILES.get('img')
-
-        try:
-            # Upload the file to Cloudinary
-            result = upload(img)
-
-            # Get other form data
-            catname = form_data.get('catname')
-
-            # Create a new AddCate instance with Cloudinary image URL and category name
-            AddCate.objects.create(img=result['secure_url'], catname=catname)
-
-            messages.success(request, 'Record added successfully!')
-            return redirect('/back/menu/')
-        except Exception as e:
-            # Handle any exceptions that may occur during image upload or database insertion
-            messages.error(request, f'Error: {str(e)}')
-            return redirect('/back/menu/')  # Redirect to the same page or an error page    
+    context={'title':'Add Categories'}
+    if request.method=="POST":
+        data=request.POST
+        img=request.FILES.get('img')
+        catname=data.get('catname')
+        AddCate.objects.create(img=img,catname=catname)
+        
+        messages.success(request,'Add record Sucessfully!!!')
+        return redirect('/back/menu/')
+    
     return render(request,'addcategories.html',context)
 @login_required(login_url='/back/')
 def editCate(request,id):
