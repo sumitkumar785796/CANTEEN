@@ -5,7 +5,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.files.storage import FileSystemStorage
 # Create your views here.
 def loginPage(request):
     context={'title':'Admin Login'}
@@ -130,11 +129,8 @@ def addcate(request):
     if request.method=="POST":
         data=request.POST
         img=request.FILES.get('img')
-         # Save the image to the media directory
-        fs = FileSystemStorage()
-        filename = fs.save(img.name, img)
         catname=data.get('catname')
-        AddCate.objects.create(img=filename,catname=catname)
+        AddCate.objects.create(img=img,catname=catname)
         
         messages.success(request,'Add record Sucessfully!!!')
         return redirect('/back/menu/')
