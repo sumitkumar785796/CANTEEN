@@ -20,7 +20,7 @@ def superuser_registration(request):
     else:
         form = SuperuserRegistrationForm()
 
-    return render(request, 'registration/superuser_registration.html', {'form': form})
+    return render(request, 'superuser_registration.html', {'form': form})
 def loginPage(request):
     context={'title':'Admin Login'}
     if request.method == "POST":
