@@ -1,0 +1,158 @@
+{% extends "Front1/base.html" %}
+{% block start %}
+<!-- Welcome Section -->
+
+	<!-- hero area -->
+	<div class="hero-area hero-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<p class="subtitle">Taste Haven</p>
+							<h1>"Good food is our language, and our canteen speaks it fluently.</h1>
+							<div class="hero-btns">
+								<a href="/contact_us/" class="bordered-btn">Contact Us</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end hero area -->
+
+	<!-- features list section -->
+	<div class="list-section pt-80 pb-80">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-shipping-fast"></i>
+						</div>
+						<div class="content">
+							<h3>Free Shipping</h3>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-phone-volume"></i>
+						</div>
+						<div class="content">
+							<h3>24/7 Support</h3>
+							<p>Get support all day</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="list-box d-flex justify-content-start align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-sync"></i>
+						</div>
+						<div class="content">
+							<h3>Refund</h3>
+							<p>If the food quality is not the best, then you can return the item</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end features list section -->
+
+	<!-- product section -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Our</span> Food</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			{% for i in query %}
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="/front1/item/{{i.catname}}/"><img width="250" height="200" src="{{i.img.url}}" alt=""></a>
+						</div>
+						<h3>{{i.catname}}</h3>
+						<!-- <a href="" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a> -->
+					</div>
+				</div>
+            {% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- end product section -->
+
+	
+	
+	<!-- advertisement section -->
+	<div class="abt-section mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<div class="abt-bg">
+						<a href="https://www.youtube.com/watch?v=py0wXzyFEP4" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-12">
+					<div class="abt-text">
+						<p class="top-sub">Since Year 2023</p>
+						<h2>We have <span class="orange-text">fresh food to eat.</span></h2>
+						<p>A canteen is a designated area within an organization or institution that offers a variety of food and beverages to individuals on-site. It serves as a convenient dining option, providing meals, snacks, and refreshments to cater to the culinary needs of the community within that specific location.</p>
+						<a href="/about_us/" class="boxed-btn mt-4">know more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end advertisement section -->
+	
+	<!-- shop banner -->
+	<!-- <section class="shop-banner">
+    	<div class="container">
+        	<h3>December sale is on! <br> with big <span class="orange-text">Discount...</span></h3>
+            <div class="sale-percent"><span> Sale! <br> Upto</span> 50% <span>off</span></div>
+            <a href="shop.html" class="cart-btn btn-lg">Shop Now</a>
+        </div>
+    </section> -->
+	<!-- end shop banner -->
+
+	<!-- logo carousel -->
+	<!-- <div class="logo-carousel-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="logo-carousel-inner">
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/1.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/2.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/3.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/4.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/5.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- end logo carousel -->
+<!-- End of Welcome Section -->	
+{% endblock %}

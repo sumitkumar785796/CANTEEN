@@ -1,0 +1,124 @@
+{% extends "Front1/base.html" %}
+{% block start %}
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Fresh and Organic</p>
+						<h1>Cart</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+	<!-- cart -->
+	<div class="cart-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+					<div class="cart-table-wrap">
+						<table class="cart-table">
+							<thead class="cart-table-head">
+								<tr class="table-head-row">
+									<th class="product-remove"></th>
+									<th class="product-image">Product Image</th>
+									<th class="product-name">Name</th>
+									<th class="product-price">Price</th>
+									<th class="product-quantity">Quantity</th>
+									<th class="product-total">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+                                {% for item in cart_items %}
+								<tr class="table-body-row" id="id{{item.id}}">
+									<td class="product-remove">
+										
+										<form action="{% url 'delete_cart_item' cart_item_id=item.id %}" method="post">
+											{% csrf_token %}
+											<button type="submit" style=" cursor: pointer; background-color: red; color: white; border: none;">x</button>
+										</form>
+										
+									</td>
+									<td class="product-image"><img src="{{ item.product.img.url }}" alt=""></td>
+									<td class="product-name">{{item.product.fname}}</td>
+									<td class="product-price">&#8377; {{item.product.price}}</td>
+									<td class="product-quantity">
+                                        <div class="row w-100">
+                                            <div class="col-sm-4">
+                                                <form action="{% url 'decrease_quantity' cart_item_id=item.id %}" method="post">
+													{% csrf_token %}
+													<button class="btn btn-success" type="submit">-</button>
+												</form>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" size="1" placeholder="0" value="{{item.quantity}}" class="form-control border-0"> 
+                                            </div>
+                                            <div class="col-sm-4">  
+													<form action="{% url 'increase_quantity' cart_item_id=item.id %}" method="post">
+													{% csrf_token %}
+													<button class="btn btn-success" type="submit" >+</button>
+												</form>
+											
+                                            </div>
+                                        </div>
+                                        
+                                    </td>
+									<td class="product-total">&#8377;{{item.total_price}}</td>
+								</tr>
+								{% endfor %}
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="total-section">
+						<table class="total-table">
+							<thead class="total-table-head">
+								<tr class="table-total-row">
+									<th>Total</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="total-data">
+									<td><strong>Total Item: </strong></td>
+									<td>{{cart_items_count}}</td>
+								</tr>
+								<tr class="total-data">
+									<td><strong>Subtotal: </strong></td>
+									<td>&#8377;{{grand_total}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+							<div class="btn-group mr-2" role="group" aria-label="Second group">
+								<form action="{% url 'clear_cart' %}" method="post">
+									{% csrf_token %}
+									<a href="" class="boxed-btn">
+									<button type="submit" style="background: none; color: white; border: none;">Clear Cart</button>
+									</a>
+								  </form>
+							</div>
+							<div class="btn-group" role="group" aria-label="Third group">
+								<a href="/front1/checkout/" class="boxed-btn black">Check Out</a>
+							</div>
+						  </div>
+						<div class="cart-buttons">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end cart -->
+
+{% endblock %}

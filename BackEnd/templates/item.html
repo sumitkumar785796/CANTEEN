@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block start %}
+<div class="container-fluid">
+  <h1 style="text-align: center; color: red;">{{query1}}</h1>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Food Banner</th>
+        <th scope="col">Categories</th>
+        <th scope="col">Week</th>
+        <th scope="col">Food Name</th>
+        <th scope="col">Describe </th>
+        <th scope="col">Price </th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in q1 %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <!-- <td>
+          {% if obj.img == '' %}
+            <img src="/static/img/logo.png" alt="error" width="50" height="50">
+          {% else %}
+            <img src="/media/{{obj.img}}" alt="error" height="50" width="50">
+          {% endif %}
+        </td> -->
+        <td>
+          <img src="{{obj.img.url}}" width="50" height="50" alt="error">
+        </td>
+        <td>{{obj.cname}}</td>
+        <td>{{obj.week}}</td>
+        <td>{{obj.fname}}</td>
+        <td>{{obj.desc|truncatechars:20}}</td>
+        <td>&#8377; {{obj.price}}</td>
+        <td>
+          <!-- <button class="edit btn btn-info" data-id="{{obj.id}}">Edit</button> -->
+          <a href="/back/editItem/{{obj.id}}/" class="btn btn-info" >Edit</a>
+          <a href="/back/deleteItem/{{obj.id}}/"><button class="btn btn-danger btn-xs">X</button></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

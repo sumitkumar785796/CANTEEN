@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block start %}
+      <div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">{{title}}</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <label for="cname" class="form-label">Categories</label>
+                          <select name="cname" id="cname" class="form-control">
+                            {% for i in dyn1 %}
+                            {% if q1.cname == i %}
+                            <option value="{{i}}" selected>{{i}}</option>
+                            {% else %}
+                            <option value="{{i}}">{{i}}</option>
+                            {% endif %}
+                            {% endfor %}
+                          </select>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="week" class="form-label">Week</label>
+                          <select name="week" id="week" class="form-control">
+                            {% for option in dyn %}
+                            {% if q1.week == option %}
+                            <option value="{{option}}" selected>{{option}}</option>
+                            {% else %}
+                            <option value="{{option}}">{{option}}</option>
+                            {% endif %}
+                            {% endfor %}
+                          </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <label for="img" class="form-label">Food Image</label>
+                        <input type="file" name="img" id="img" value="{{q1.img}}" title="{{q1.img}}" class="form-control">
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="fname" class="form-label">Food Name</label>
+                        <input type="text" name="fname" id="fname" class="form-control" placeholder="Enter Food Name" value="{{q1.fname}}">
+                      </div>
+                    </div> 
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <label for="price" class="form-label">Food Name</label>
+                        <input type="number" name="price" id="price" class="form-control" placeholder="Enter Food Amount" value="{{q1.price}}">
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <label for="desc" class="form-label">Food Description</label>
+                        <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Description...." class="form-control">{{q1.desc}}</textarea>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

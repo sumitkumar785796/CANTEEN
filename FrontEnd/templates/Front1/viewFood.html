@@ -1,0 +1,50 @@
+{% extends "Front1/base.html" %}
+{% block start %}
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<h1>{{query.cname}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- single product -->
+	<div class="single-product mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="single-product-img">
+						<img src="{{query.img.url}}" height="350" width="350">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-content">
+						<h3>{{query.fname}}</h3>
+						<p class="single-product-pricing"> &#8377; {{query.price}}</p>
+						<p>{{query.desc}}</p>
+						<div class="single-product-form">
+							<form method="post" action="{% url 'add_to_cart' query.id %}">
+								{% csrf_token %}
+									<button type="submit" class="btn btn-danger">Add to Cart</button>
+							</form>
+						</div>
+						<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end single product -->	
+{% endblock %}

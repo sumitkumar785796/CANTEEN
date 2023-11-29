@@ -1,0 +1,114 @@
+{% extends "Front1/base.html" %}
+{% block start %}
+
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>Fresh and Organic</p>
+                    <h1>Check Out Product</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- check out section -->
+<div class="checkout-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-accordion-wrap">
+                    <div class="accordion" id="accordionExample"> 
+                      <a href="/add_address/" >Add New Address</a>
+                    </div>
+                    <div class="card single-accordion">
+                      <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Select Shipping Address
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                          <div class="shipping-address-form">
+                              <p>
+                                <form method="post">
+                                  {% csrf_token %}
+                                  {% for item in query %}
+                                    <input type="radio" name="shipping_address" value="{{ item.id }}" required>{{ item.fullname }} - {{ item.address }} - {{item.pincode}} - {{ item.mobile }}<br>
+                                    {% endfor %}
+                              </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card single-accordion">
+                      <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Payment Details
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                          <div class="card-details">
+                              <p>
+                                <input type="radio" value="CASH ON DELIVERY" name="payment_method" id="pay1"> CASH ON DELIVERY
+                                <input type="radio" value="ONLINE" name="payment_method" id="pay2" required> ONLINE <br>
+                              </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="order-details-wrap">
+                    <table class="order-details">
+                        <thead>
+                            <tr>
+                                <th>Your order Details</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody class="order-details-body">
+                            <tr>
+                                <td>Product</td>
+                                <td>Total</td>
+                            </tr>
+                            {% for item in cart_items %}
+                            <tr>
+                                <td>{{item.product.fname}}</td>
+                                <td>&#8377;{{item.total_price}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tbody class="checkout-details">
+                                                       
+                            <tr>
+                                <td>Total</td>
+                                <td>&#8377;{{grand_total}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <button type="submit" class="btn btn-success">Place Order</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end check out section -->
+
+
+{% endblock %}

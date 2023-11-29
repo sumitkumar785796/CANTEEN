@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block start %}
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <a href="/back/addcate/" class="btn btn-primary float-end">Add Categories</a>
+        <h5 class="card-title fw-semibold mb-4">{{title}}</h5>
+        <div class="container-fluid">
+          <div class="container-fluid">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                    {% for obj in query %}
+                  <div class="col-md-4">
+                      <!-- <h5 class="card-title fw-semibold mb-4">Card</h5> -->
+                      <div class="card">
+                      <img src="{{obj.img.url}}" width="250" height="200" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{obj.catname}}</h5>
+                        <a href="/back/item/{{obj.catname}}/" class="btn btn-primary">View</a>
+                        <a href="/back/Editcate/{{obj.id}}/" class="btn btn-success">Update</a>
+                        <a href="/back/Delcate/{{obj.id}}/" class="btn btn-danger">X</a>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

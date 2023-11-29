@@ -1,0 +1,29 @@
+{% extends "Front1/base.html" %}
+{% block start %}
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p></p>
+						<h1>View Order Item</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+<div class="container mt-5">
+    <h1>Order Item Detail</h1>
+
+    <div>
+      <h2>Order #{{ order_item.order.id }}</h2>
+      <p>Product: {{ order_item.product.fname }}</p>
+      <p>Quantity: {{ order_item.quantity }}</p>
+      <p>Price: ${{ order_item.price }}</p>
+    </div>
+  
+</div>
+
+{% endblock %}

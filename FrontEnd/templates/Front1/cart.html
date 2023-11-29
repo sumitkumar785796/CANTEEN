@@ -1,0 +1,112 @@
+{% extends "Front1/base.html" %}
+{% block start %}
+{% load cart_tag %}
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Fresh and Organic</p>
+						<h1>Cart</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- cart -->
+	<div class="cart-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+					<div class="cart-table-wrap">
+						<table class="cart-table">
+							<thead class="cart-table-head">
+								<tr class="table-head-row">
+									<th class="product-remove"></th>
+									<th class="product-image">Product Image</th>
+									<th class="product-name">Name</th>
+									<th class="product-price">Price</th>
+									<th class="product-quantity">Quantity</th>
+									<th class="product-total">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+                                {% for key,value in request.session.cart.items %}
+								<tr class="table-body-row" id="id{{value.id}}">
+									<td class="product-remove"><a href="{% url 'item_clear' key %}"><i class="far fa-window-close"></i></a></td>
+									<td class="product-image"><img src="{{value.img}}/" alt=""></td>
+									<td class="product-name">{{value.fname}}</td>
+									<td class="product-price">&#8377; {{value.price}}</td>
+									<td class="product-quantity">
+                                        <div class="row w-100">
+                                            <div class="col-sm-4">
+                                                <a href="{% url 'item_decrement' value.product_id %}#id{{value.id}}" class="btn btn-danger">-</a>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" size="1" placeholder="0" value="{{value.quantity}}" class="form-control border-0"> 
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <a href="{% url 'item_increment' value.product_id %}#id{{value.id}}" class="btn btn-danger">+</a>
+                                            </div>
+                                        </div>
+                                        
+                                    </td>
+									<td class="product-total">&#8377;{{ value.price|multiply:value.quantity }}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="total-section">
+						<table class="total-table">
+							<thead class="total-table-head">
+								<tr class="table-total-row">
+									<th>Total</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="total-data">
+									<td><strong>Subtotal: </strong></td>
+									<td>&#8377;{{ cart_total_amount }}</td>
+								</tr>
+								<!-- <tr class="total-data">
+									<td><strong>Shipping: </strong></td>
+									<td>$45</td>
+								</tr> -->
+								<!-- <tr class="total-data">
+									<td><strong>Total: </strong></td>
+									<td>&#8377;{{ cart_total_amount }}</td>
+								</tr> -->
+							</tbody>
+						</table>
+						<div class="cart-buttons">
+							<a href="{% url 'cart_clear' %}" class="boxed-btn">Clear Cart</a>
+							<a href="/front1/checkout/" class="boxed-btn black">Check Out</a>
+						</div>
+					</div>
+
+					<!-- <div class="coupon-section">
+						<h3>Apply Coupon</h3>
+						<div class="coupon-form-wrap">
+							<form action="index.html">
+								<p><input type="text" placeholder="Coupon"></p>
+								<p><input type="submit" value="Apply"></p>
+							</form>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end cart -->
+
+
+{% endblock %}

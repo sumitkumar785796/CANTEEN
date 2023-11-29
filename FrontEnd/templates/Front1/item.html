@@ -1,0 +1,44 @@
+{% extends "Front1/base.html" %}
+{% block start %}
+
+<!-- Welcome Section -->
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<h1>{{query.catname}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+<!-- product section -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+              {% for i in query1 %}
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="single-product-item">
+                    <div class="product-image">
+                        <a href="/front1/view/{{i.id}}/"><img width="250" height="250" src="{{i.img.url}}" alt=""></a>
+                    </div>
+                    <h3>{{i.fname}}</h3>
+                    <p class="product-price">&#8377; {{i.price}}</p>
+                    <form method="post" action="{% url 'add_to_cart' i.id %}">
+                        {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Add to Cart</button>
+                    </form>
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- end product section -->
+
+{% endblock %}

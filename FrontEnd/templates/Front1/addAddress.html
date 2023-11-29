@@ -1,0 +1,72 @@
+{% extends "Front1/base.html" %}
+{% block start %}
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Fresh and Organic</p>
+						<h1>Add New Address</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+<div class="card single-accordion">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Add New Address
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        {% if messages %}
+        <div class="alert alert-info">
+          {% for message in messages %}
+          {{message}}
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="billing-address-form">
+            <form method="post">
+              {% csrf_token %}
+                <p><input type="text" name="fullname" placeholder="Name"></p>
+                <p><input type="email" name="email" placeholder="Email"></p>
+                <p><input type="text" name="address" placeholder="Address"></p>
+                <p><input type="number" name="pincode" placeholder="Pincode"></p>
+                <p><input type="number" name="mobile" placeholder="Phone" id="mobileNumber" pattern="\d{10}" required oninput="restrictToTenDigits()"></p>
+                   <!-- Display validation message -->
+                  <div id="validationMessage"></div>
+                <p><textarea name="anysuggession" id="anysuggession" cols="30" rows="10" placeholder="Say Something"></textarea></p>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function validateMobileNumber() {
+        var inputElement = document.getElementById("mobileNumber");
+        var inputValue = inputElement.value;
+        var regex = /^\d{10}$/;
+  
+        if (regex.test(inputValue)) {
+            document.getElementById("validationMessage").innerText = "Valid mobile number";
+        } else {
+            document.getElementById("validationMessage").innerText = "Invalid mobile number. Please enter a 10-digit number.";
+        }
+    }
+  
+    function restrictToTenDigits() {
+        var inputElement = document.getElementById("mobileNumber");
+        inputElement.value = inputElement.value.replace(/\D/g, '').slice(0, 10);
+        validateMobileNumber(); // Trigger validation after updating the input value
+    }
+  </script>
+  {% endblock %}

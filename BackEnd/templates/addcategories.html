@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block start %}
+      <div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              {% if messages %}
+              <div class="alert alert-info">
+                {% for message in messages %}
+                {{message}}
+                {% endfor %}
+              </div>
+              {% endif %}
+              <h5 class="card-title fw-semibold mb-4">{{title}}</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <label for="img" class="form-label">Food Image</label>
+                        <input type="file" name="img" id="img" class="form-control" value="{{update.img}}" title="{{update.img}}">
+                      </div>
+                      <div class="col-sm-12">
+                        <label for="catname" class="form-label">Name</label>
+                        <textarea name="catname" id="catname" cols="30" rows="10" placeholder="Description...." class="form-control">{{update.catname}}</textarea>
+                        <!-- <input type="text" name="fname" id="fname" class="form-control"> -->
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
