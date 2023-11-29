@@ -24,12 +24,16 @@ import cloudinary.api
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG","FALSE").lower() == "True"
+# DEBUG = os.environ.get("DEBUG","FALSE").lower() == "True"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+
+SECRET_KEY = os.environ.get("SECRET_KEY", "default-secret-key")
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
 
 # Application definition
 
@@ -90,9 +94,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-database_url=os.environ.get("DATABASE_URL")
-DATABASES['default']=dj_database_url.parse(database_url)
 
+database_url = os.environ.get("DATABASE_URL")
+if database_url:
+    DATABASES['default'] = dj_database_url.parse(database_url)
+else:
+    print("DATABASE_URL environment variable is not set.")
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -147,9 +154,16 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #cloudinary django integration
+# cloudinary.config(
+#     cloud_name="dzoebynoh",
+#     api_key="352433114331387",
+#     api_secret="352433114331387",
+# )
+
+# Cloudinary configuration
 cloudinary.config(
-    cloud_name="dzoebynoh",
-    api_key="352433114331387",
-    api_secret="xLW_Cmv1CAN6hhOaGUhhhGBY0bE",
+    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME", "dzoebynoh"),
+    api_key=os.environ.get("CLOUDINARY_API_KEY", "352433114331387"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET", "352433114331387"),
 )
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
