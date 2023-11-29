@@ -167,5 +167,5 @@ CLOUDINARY_STORAGE = {
     'API_KEY' : os.environ['CLOUD_API_KEY'],
     'API_SECRET' : os.environ['CLOUD_API_SECRET']
 }
-if os.environ["ENVIRONMENT"] == "PRODUCTION":
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# if os.environ["ENVIRONMENT"] == "PRODUCTION":
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
