@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 
 def superuser_registration(request):
     # Check if a superuser already exists
-    if not User.objects.filter(is_superuser=True).exists():
+    if not get_user_model().objects.filter(is_superuser=True).exists():
         # Create a superuser
         User = get_user_model()
         superuser = User.objects.create_superuser(
