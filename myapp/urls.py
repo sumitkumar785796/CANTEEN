@@ -25,5 +25,9 @@ urlpatterns = [
     path('', include('BackEnd.urls')),
     path('', include('FrontEnd.urls')),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# only in DEBUG
+# in production this wont work !
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
