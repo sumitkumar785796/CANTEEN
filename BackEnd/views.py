@@ -5,25 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import SuperuserRegistrationForm
-from django.contrib.auth import get_user_model
 # Create your views here.
-
-def superuser_registration(request):
-    # Check if a superuser already exists
-    if not get_user_model().objects.filter(is_superuser=True).exists():
-        # Create a superuser
-        User = get_user_model()
-        superuser = User.objects.create_superuser(
-            username='admin',
-            email='admin@example.com',
-            password='admin'
-        )
-        
-        return render(request, 'superuser_registration.html', {'message': 'Superuser created successfully'})
-    else:
-        return render(request, 'error.html', {'message': 'Superuser already exists'})
-
 def loginPage(request):
     context={'title':'Admin Login'}
     if request.method == "POST":
