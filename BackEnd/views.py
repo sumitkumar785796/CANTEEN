@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from cloudinary.uploader import upload
 # Create your views here.
 def loginPage(request):
     context={'title':'Admin Login'}
@@ -129,8 +130,10 @@ def addcate(request):
     if request.method=="POST":
         data=request.POST
         img=request.FILES.get('img')
+        # Upload the file to Cloudinary
+        result = upload(img)
         catname=data.get('catname')
-        AddCate.objects.create(img=img,catname=catname)
+        AddCate.objects.create(img=result,catname=catname)
         
         messages.success(request,'Add record Sucessfully!!!')
         return redirect('/back/menu/')
