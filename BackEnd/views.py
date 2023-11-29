@@ -57,7 +57,6 @@ def regPage(request):
             username=username,
             email=email
         )
-        user.is_superuser = True
         user.set_password(password)
         user.save()
         messages.info(request,'Account sucessfully created')
