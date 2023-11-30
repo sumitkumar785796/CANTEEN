@@ -74,7 +74,7 @@ class AddAddress(models.Model):
     email=models.EmailField(null=True,unique=True)
     address=models.TextField(null=True)
     pincode=models.IntegerField(null=True)
-    mobile=models.CharField(max_length=200,null=True)
+    mobile=models.TextField()
     anysuggession=models.TextField(null=True)
     def __str__(self) -> str:
         return self.fullname
