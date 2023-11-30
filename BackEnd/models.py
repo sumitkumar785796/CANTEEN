@@ -94,7 +94,7 @@ class Order(models.Model):
         (CANCELED, 'Canceled'),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    shipping_address = models.ForeignKey(AddAddress, on_delete=models.CASCADE)
+    shipping_address = models.ForeignKey(AddAddres, on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=255)  # You may want to use choices for payment methods
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
