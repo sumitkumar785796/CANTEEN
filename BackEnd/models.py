@@ -4,7 +4,8 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class AddCate(models.Model):
-    img=CloudinaryField('img')
+    # img=CloudinaryField('img')
+    img=models.URLField()
     catname=models.CharField(max_length=300)
     def __str__(self) -> str:
         return self.catname
@@ -13,7 +14,8 @@ class Product(models.Model):
     cname=models.ForeignKey(AddCate,related_name='categories',on_delete=models.CASCADE)
     week=models.CharField(max_length=100)
   
-    img=CloudinaryField('img')
+    # img=CloudinaryField('img')
+    img=models.URLField()
     fname=models.CharField(max_length=500)
     desc=models.TextField()
     price=models.IntegerField(null=True,blank=True)
