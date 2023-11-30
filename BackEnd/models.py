@@ -69,13 +69,13 @@ class Cart(models.Model):
         return f"Cart for {self.user.username}"
 
 class AddAddress(models.Model):
-    user=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True)
-    fullname=models.CharField(max_length=300,null=True)
-    email=models.EmailField(null=True,unique=True)
-    address=models.TextField(null=True)
-    pincode=models.IntegerField(null=True)
-    mobile=models.CharField(max_length=15)
-    anysuggession=models.TextField(null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    fullname = models.CharField(max_length=300, null=True)
+    email = models.EmailField(null=True, unique=True)
+    address = models.TextField(null=True)
+    pincode = models.IntegerField(null=True)
+    mobile = models.CharField(max_length=15)
+    anysuggession = models.TextField(null=True)
     def __str__(self) -> str:
         return self.fullname
     
