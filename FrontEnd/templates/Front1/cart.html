@@ -38,7 +38,7 @@
                                 {% for key,value in request.session.cart.items %}
 								<tr class="table-body-row" id="id{{value.id}}">
 									<td class="product-remove"><a href="{% url 'item_clear' key %}"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="{{value.img}}/" alt=""></td>
+									<td class="product-image"><img src="{{value.img}}" alt=""></td>
 									<td class="product-name">{{value.fname}}</td>
 									<td class="product-price">&#8377; {{value.price}}</td>
 									<td class="product-quantity">

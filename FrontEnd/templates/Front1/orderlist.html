@@ -57,7 +57,7 @@
 								<ul>
 								  {% for order_item in order.orderitem_set.all %}
 									<li>
-									<img src="{{order_item.product.img.url}}" style="width: 50px; height: 50px;">
+									<img src="{{order_item.product.img}}" style="width: 50px; height: 50px;">
 									  {{ order_item.quantity }} x {{ order_item.product.fname }} - &#8377;{{ order_item.price }}
 									</li>
 									{% endfor %}
