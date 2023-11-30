@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
+# from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class AddCate(models.Model):
@@ -68,7 +68,7 @@ class Cart(models.Model):
     def __str__(self):
         return f"Cart for {self.user.username}"
 
-class AddAddres(models.Model):
+class AddRes(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     fullname = models.CharField(max_length=300)
     email = models.EmailField()
@@ -94,7 +94,7 @@ class Order(models.Model):
         (CANCELED, 'Canceled'),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    shipping_address = models.ForeignKey(AddAddres, on_delete=models.CASCADE)
+    shipping_address = models.ForeignKey(AddRes, on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=255)  # You may want to use choices for payment methods
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)

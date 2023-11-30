@@ -262,7 +262,7 @@ def add_address(request):
             mobile = data.get('mobile')
             anysuggession = data.get('anysuggession')
           
-            AddAddres.objects.create(
+            AddRes.objects.create(
                 user=user,
                 fullname=fullname,
                 email=email,
@@ -298,7 +298,7 @@ def checkout(request):
             # Create the order
             order = Order.objects.create(
                 user=request.user,
-                shipping_address=AddAddres.objects.get(id=shipping_address_id),
+                shipping_address=AddRes.objects.get(id=shipping_address_id),
                 payment_method=payment_method,
                 total_price=grand_total,
             )
@@ -317,7 +317,7 @@ def checkout(request):
 
             return redirect('order_success')  # Create a view for order success
 
-        queryset = AddAddres.objects.filter(user=request.user)
+        queryset = AddRes.objects.filter(user=request.user)
         context = {
             'title':'Check out',
             'cart_items': user_cart_items,
