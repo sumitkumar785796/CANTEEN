@@ -262,7 +262,7 @@ def add_address(request):
             mobile = data.get('mobile')
             anysuggession = data.get('anysuggession')
           
-            AddAddress.objects.create(
+            AddAddres.objects.create(
                 user=user,
                 fullname=fullname,
                 email=email,

@@ -68,14 +68,14 @@ class Cart(models.Model):
     def __str__(self):
         return f"Cart for {self.user.username}"
 
-class AddAddress(models.Model):
+class AddAddres(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    fullname = models.CharField(max_length=300, null=True)
-    email = models.EmailField(null=True, unique=True)
-    address = models.TextField(null=True)
-    pincode = models.IntegerField(null=True)
+    fullname = models.CharField(max_length=300)
+    email = models.EmailField()
+    address = models.TextField()
+    pincode = models.IntegerField()
     mobile = models.CharField(max_length=15)
-    anysuggession = models.TextField(null=True)
+    anysuggession = models.TextField()
     def __str__(self) -> str:
         return self.fullname
     
