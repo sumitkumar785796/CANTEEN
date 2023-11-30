@@ -11,8 +11,25 @@ class AddCate(models.Model):
         return self.catname
       
 class Product(models.Model):
+    SUNDAY = 'SUNDAY'
+    MONDAY = 'MONDAY'
+    TUESDAY = 'TUESDAY'
+    WEDNESDAY = 'WEDNESDAY'
+    THRUSDAY = 'THRUSDAY'
+    FRIDAY = 'FRIDAY'
+    SATURDAY = 'SATURDAY'
+
+    WEEK_CHOICES = [
+        (SUNDAY ,'SUNDAY'),
+        (MONDAY , 'MONDAY'),
+        (TUESDAY , 'TUESDAY'),
+        (WEDNESDAY , 'WEDNESDAY'),
+        (THRUSDAY , 'THRUSDAY'),
+        (FRIDAY, 'FRIDAY'),
+        (SATURDAY, 'SATURDAY'),
+    ]
     cname=models.ForeignKey(AddCate,related_name='categories',on_delete=models.CASCADE)
-    week=models.CharField(max_length=100)
+    week=models.CharField(max_length=100 , choices=WEEK_CHOICES, default=SUNDAY)
   
     # img=CloudinaryField('img')
     img=models.URLField()
