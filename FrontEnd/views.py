@@ -292,14 +292,8 @@ def checkout(request):
         # user_cart_items = CartItem.objects.filter(user=request.user)
         if request.method == "POST":
             data = request.POST
-            if shipping_address_id == '':
-                messages.success(request, 'Select Shipping address!!!')
-            else:
-                shipping_address_id = data.get('shipping_address')
-            if payment_method =='':
-                messages.success(request, 'Select Payment method!!!')
-            else:
-                payment_method = data.get('payment_method')
+            shipping_address_id = data.get('shipping_address')
+            payment_method = data.get('payment_method')
 
             # Create the order
             order = Order.objects.create(

@@ -106,7 +106,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Order #{self.id} - {self.user.username}"
+        return f"Order #{self.id} - {self.user.username}-{self.shipping_address.address}"
     def cancel_order_by_user(self):
         if self.status == self.PENDING or self.status == self.PROCESSING:
             self.status = self.CANCELED
