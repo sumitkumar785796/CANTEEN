@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class AddCate(models.Model):
@@ -68,14 +67,14 @@ class Cart(models.Model):
     def __str__(self):
         return f"Cart for {self.user.username}"
 
-class AddRes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    fullname = models.CharField(max_length=300)
-    email = models.EmailField()
-    address = models.TextField()
-    pincode = models.IntegerField()
-    mobile = models.CharField(max_length=15)
-    anysuggession = models.TextField()
+class AddAddress(models.Model):
+    user=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True)
+    fullname=models.CharField(max_length=300,null=True)
+    email=models.EmailField(null=True,unique=True)
+    address=models.TextField(null=True)
+    pincode=models.IntegerField(null=True)
+    mobile=models.CharField(max_length=15)
+    anysuggession=models.TextField(null=True)
     def __str__(self) -> str:
         return self.fullname
     
@@ -94,7 +93,7 @@ class Order(models.Model):
         (CANCELED, 'Canceled'),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    shipping_address = models.ForeignKey(AddRes, on_delete=models.CASCADE)
+    shipping_address = models.ForeignKey(AddAddress, on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=255)  # You may want to use choices for payment methods
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
